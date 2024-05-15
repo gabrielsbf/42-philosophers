@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:54:44 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/04/30 03:07:23 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/05/05 01:55:48 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ void	philo_states(char *argv[])
 }
 
 
-
-
-
-
 int main(int argc, char *argv[])
 {
 	if (argc == 5 || argc == 6)
@@ -83,9 +79,9 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("the program receives the arguments:\n>>>number_of_philosopher");
-		printf("\n>>>time_to_die\n>>>time_to_eat\n>>>time_to_sleep\n");
-		printf("and the additional [number_of_times_each_philosopher_must_eat]\n");
+		printf("the program receives the arguments:\n>>> number_of_philosopher");
+		printf("\n>>> time_to_die\n>>> time_to_eat\n>>> time_to_sleep\n");
+		printf(">>> optional[number_of_times_each_philosopher_must_eat] \n");
 	}
 }
 	
