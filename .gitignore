@@ -1,2 +1,4 @@
-.vscode/
+builds/
 a.out
+philo
+.vscode/
