@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:55:07 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 14:55:18 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:06:40 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		died_from_starve(t_philo *philo);
 
 //judge
 void	*judge_routine(void *ptr);
+int		is_philo_full(t_philo *philo);
 // DEBUG FUNCTION - NEED to erase.
 void	print_tb(t_table *tb);
 #endif

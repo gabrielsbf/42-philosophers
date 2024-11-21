@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:12:22 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 16:58:29 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:34:01 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int	assert_run(t_philo *philo)
 		do_mutex_action(&philo->table->mtx_end_run, UNLOCK);
 		return (0);
 	}
-	// printf("RUN CONTINUES\n");
 	do_mutex_action(&philo->table->mtx_end_run, UNLOCK);
+	if (is_philo_full(philo))
+		return (0);
 	return (1);
 }
 
@@ -61,7 +62,7 @@ static void	*philo_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	set_starving_cron(philo);
 	if (philo->id % 2 == 0)
-		make_elapse(0.006);
+		make_elapse(0.1);
 	while (assert_run(philo) == 1)
 	{
 		if (!is_thinking(philo))
@@ -71,7 +72,6 @@ static void	*philo_routine(void *ptr)
 		if (!is_sleeping(philo))
 			break ;
 	}
-	printf("VAI SAIR MERDA\n");
 	return (NULL);
 }
 

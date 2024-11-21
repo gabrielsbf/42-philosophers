@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:58:41 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 15:40:29 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:51:57 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static t_table	*fill_table(t_table *tb, char **args, int c_args)
 	tb->end_run = 0;
 	do_mutex_action(&tb->mtx_end_run, INIT);
 	do_mutex_action(&tb->mtx_print, INIT);
+	do_mutex_action(&tb->mtx_lunch_max, INIT);
 	set_forks(tb, &tb->fork);
 	call_philos(tb, &tb->philo);
 	return (tb);

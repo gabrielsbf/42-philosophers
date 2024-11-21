@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:33:49 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 17:00:19 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:32:09 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 
 int	died_from_starve(t_philo *philo)
 {
-	double	l;
-
-	l = (double)get_current_milis();
 	do_mutex_action(&philo->mtx_starve_time, LOCK);
-	printf("died from starve : %ld | starve time is: %ld| diference: %ld\n", (long)l, (long)philo->starve_time, (long)l - (long)philo->starve_time);
-	if (philo->starve_time <= l)
+	if (philo->starve_time <= get_current_milis())
 	{
-		printf("died from starve\n" );
 		do_mutex_action(&philo->mtx_starve_time, UNLOCK);
 		return (1);
 	}
-	printf("não morreu\n" );
 	do_mutex_action(&philo->mtx_starve_time, UNLOCK);
 	return (0);
 }
@@ -52,16 +46,21 @@ int	is_philo_full(t_philo *philo)
 		do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 		return (1);
 	}
-	return (0);
 	do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
+	return (0);
 }
 
 int	all_lunched(t_philo *philo, int *lunch)
 {
 	if (is_philo_full(philo))
-		(*lunch) = (*lunch) + 1;
-	if ((*lunch) == philo->table->lunch_max)
+		*lunch = *lunch + 1;
+	do_mutex_action(&philo->mtx_lunch_ct, LOCK);
+	if ((*lunch) == philo->table->philo_count)
+	{
+		do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 		return (1);
+	}
+	do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 	return (0);
 }
 

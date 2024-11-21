@@ -2,7 +2,7 @@ NAME = philo
 
 RM = rm -rf
 
-COMPILER = cc -Wall -Wextra -Werror
+COMPILER = cc -Wall -Wextra -Werror -pthread
 
 DIR_OBJS = builds/
 
@@ -30,6 +30,7 @@ $(DIR_OBJS)/%.o : %.c
 		mkdir -p $(dir $@)
 		$(COMPILER) -c $< -o $@ -I $(INCLUDE_FD)
 
+
 val: all
 		valgrind --read-inline-info=yes --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./$(NAME)
 clean:
@@ -39,3 +40,9 @@ fclean: clean
 		$(RM) $(NAME) $(DIR_OBJS)
 
 re: fclean all
+
+fsanitize: COMPILER += -fsanitize=thread
+fsanitize: fclean $(NAME)
+
+debug: COMPILER += -ggdb3
+debug : fclean $(NAME)

@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:55:07 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 14:51:19 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:06:24 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ struct s_table
 	int			lunch_max;
 	t_mutex		mtx_print;
 	t_mutex		mtx_end_run;
+	t_mutex		mtx_lunch_max;
 	t_philo		*philo;
 	t_fork		*fork;
 };
