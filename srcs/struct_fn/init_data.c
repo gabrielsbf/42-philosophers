@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:58:41 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 00:03:50 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:40:29 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void call_philos(t_table *tb, t_philo **philo)
 		(*philo)[i].table = tb;
 		(*philo)[i].id = i + 1;
 		(*philo)[i].starve_time = 0;
-		(*philo)[i].died_hungry = 0;
 		(*philo)[i].lunch_ct = 0;
 		(*philo)[i].tt_die = tb->tt_die;
 		(*philo)[i].tt_eat = tb->tt_eat;
@@ -60,6 +59,8 @@ static t_table	*fill_table(t_table *tb, char **args, int c_args)
 	tb->lunch_ct = 0;
 	if (c_args == 6)
 		tb->lunch_max = ft_atol(args[5]);
+	else
+		tb->lunch_max = -1;
 	tb->end_run = 0;
 	do_mutex_action(&tb->mtx_end_run, INIT);
 	do_mutex_action(&tb->mtx_print, INIT);

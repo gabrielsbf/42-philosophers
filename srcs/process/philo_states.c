@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:50:45 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 02:44:14 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:55:12 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static	int	get_side_fork(t_philo **philo, t_which_fork side)
 	do_mutex_action(&fork_choosen->mtx_fork, LOCK);
 	if (fork_choosen->in_use == 0)
 	{
-		communicate_action((*philo), TOOK_FORK);
 		fork_choosen->in_use = 1;
 		do_mutex_action(&fork_choosen->mtx_fork, UNLOCK);
+		communicate_action((*philo), TOOK_FORK);
 		return (1);
 	}
 	do_mutex_action(&fork_choosen->mtx_fork, UNLOCK);
@@ -66,13 +66,14 @@ int	is_eating(t_philo *philo)
 	int	get_fork;
 
 	get_fork = 0;
+	if (assert_run(philo) == 0)
+		return (0);
 	while (assert_run(philo) == 1 && get_fork < 2)
 	{
 		if (get_fork == 0)
 			get_fork += get_side_fork(&philo, LFORK);
 		else
 			get_fork += get_side_fork(&philo, RFORK);
-		//Perguntar por que ele só tenta pegar o natural da mão no caso de não haver nenhum.
 	}
 	if (get_fork == 2)
 	{
@@ -81,7 +82,7 @@ int	is_eating(t_philo *philo)
 		philo->lunch_ct++;
 		do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 		set_starving_cron(philo);
-		make_elapse(philo->tt_die);
+		make_elapse(philo->tt_eat);
 		return_fork(&philo);
 		return (1);
 	}

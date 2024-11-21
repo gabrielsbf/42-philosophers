@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:54:44 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 02:29:49 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:27:37 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	start_process(char **args, int c_args)
 	tb = create_scenario(args, c_args);
 	print_tb(tb);
 	run_routine(tb);
-	// free_structs(&tb);
+	free_structs(&tb);
 }
 
 int main(int argc, char *argv[])

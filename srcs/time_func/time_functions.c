@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 20:11:50 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 01:12:37 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:13:06 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void	make_elapse(double pass_milis)
 	double	time_to_compare;
 
 	time_to_compare = get_current_milis();
-	while(get_current_milis() - time_to_compare < pass_milis)
+	while((get_current_milis() - time_to_compare) < pass_milis)
 		usleep(500);
-
 }
 
 void	sleep_one_mili(void)

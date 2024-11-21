@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:55:07 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 01:38:45 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:51:19 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef	struct s_fork
 typedef struct s_philosophers
 {
 	int			id;
-	int			died_hungry;
 	long		tt_eat;
 	long		tt_sleep;
 	long		tt_die;

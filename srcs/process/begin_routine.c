@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   begin_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 23:12:22 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 02:53:52 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:58:29 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	set_starving_cron(t_philo *philo)
 void	communicate_action(t_philo *philo, t_philostate state)
 {
 	double elapsed;
+
 	do_mutex_action(&philo->table->mtx_print, LOCK);
 	elapsed = get_current_milis() - philo->table->timer;
 	printf("%ld - %d ", (long)elapsed, philo->id);
@@ -42,12 +43,13 @@ void	communicate_action(t_philo *philo, t_philostate state)
 int	assert_run(t_philo *philo)
 {
 	do_mutex_action(&philo->table->mtx_end_run, LOCK);
-	//check if philo is full to
+	// printf("RUN IS: %d\n", philo->table->end_run);
 	if (philo->table->end_run == 1)
 	{
 		do_mutex_action(&philo->table->mtx_end_run, UNLOCK);
 		return (0);
 	}
+	// printf("RUN CONTINUES\n");
 	do_mutex_action(&philo->table->mtx_end_run, UNLOCK);
 	return (1);
 }
@@ -59,33 +61,24 @@ static void	*philo_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	set_starving_cron(philo);
 	if (philo->id % 2 == 0)
-		make_elapse(0.060);
-	// printf("passed elapse\n");
+		make_elapse(0.006);
 	while (assert_run(philo) == 1)
 	{
 		if (!is_thinking(philo))
-		{
-			printf("break on thinking\n");
 			break ;
-		}
 		if (!is_eating(philo))
-		{
-			printf("break on eating\n");
 			break ;
-		}
 		if (!is_sleeping(philo))
-		{
-			printf("break on sleeping\n");
 			break ;
-		}
 	}
-	printf("SAIU?\n");
+	printf("VAI SAIR MERDA\n");
 	return (NULL);
 }
 
 void	run_routine(t_table *tb)
 {
-	int	i;
+	int			i;
+	pthread_t	judge;
 
 	i = -1;
 	tb->timer = get_current_milis();
@@ -93,6 +86,9 @@ void	run_routine(t_table *tb)
 		pthread_create(&tb->philo[i].thread, NULL,
 			philo_routine, (void *)&tb->philo[i]);
 	i = -1;
+	pthread_create(&judge, NULL, judge_routine, (void *)tb);
+	pthread_join(judge, NULL);
 	while (++i < tb->philo_count)
 		pthread_join(tb->philo[i].thread, NULL);
+
 }

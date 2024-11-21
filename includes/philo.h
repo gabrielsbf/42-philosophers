@@ -6,7 +6,7 @@
 /*   By: gabrfern <gabrfern@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 01:55:07 by gabrfern          #+#    #+#             */
-/*   Updated: 2024/11/21 02:03:05 by gabrfern         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:55:18 by gabrfern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,17 @@ int	is_thinking(t_philo *philo);
 int	is_sleeping(t_philo *philo);
 int	is_eating(t_philo *philo);
 
-//routine
+//start routine
 void	run_routine(t_table *tb);
 int		assert_run(t_philo *philo);
 void	communicate_action(t_philo *philo, t_philostate state);
 void	set_starving_cron(t_philo *philo);
 
+//end routine
+int		died_from_starve(t_philo *philo);
+
+//judge
+void	*judge_routine(void *ptr);
 // DEBUG FUNCTION - NEED to erase.
 void	print_tb(t_table *tb);
 #endif
