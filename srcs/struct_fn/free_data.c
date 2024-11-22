@@ -24,6 +24,7 @@ static void	remove_mtx(t_table **tb)
 	{
 		do_mutex_action(&(*tb)->philo[i].mtx_lunch_ct, DESTROY);
 		do_mutex_action(&(*tb)->philo[i].mtx_starve_time, DESTROY);
+		do_mutex_action(&(*tb)->philo[i].mtx_access_fork, DESTROY);
 		i++;
 	}
 	i = 0;
