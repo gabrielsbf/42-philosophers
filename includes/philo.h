@@ -30,9 +30,9 @@ void	sleep_one_mili(void);
 void	free_structs(t_table **tb);
 
 //states
-int	is_thinking(t_philo *philo);
-int	is_sleeping(t_philo *philo);
-int	is_eating(t_philo *philo);
+int		is_thinking(t_philo *philo);
+int		is_sleeping(t_philo *philo);
+int		is_eating(t_philo *philo);
 
 //start routine
 void	run_routine(t_table *tb);
@@ -46,6 +46,5 @@ int		died_from_starve(t_philo *philo);
 //judge
 void	*judge_routine(void *ptr);
 int		is_philo_full(t_philo *philo);
-// DEBUG FUNCTION - NEED to erase.
-void	print_tb(t_table *tb);
+
 #endif

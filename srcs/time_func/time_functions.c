@@ -31,7 +31,7 @@ void	make_elapse(double pass_milis)
 	double	time_to_compare;
 
 	time_to_compare = get_current_milis();
-	while((get_current_milis() - time_to_compare) < pass_milis)
+	while ((get_current_milis() - time_to_compare) < pass_milis)
 		usleep(500);
 }
 
@@ -40,7 +40,7 @@ void	sleep_one_mili(void)
 	int	i;
 
 	i = 1;
-	while(i <= 10)
+	while (i <= 10)
 	{
 		usleep(100);
 		i++;

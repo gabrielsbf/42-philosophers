@@ -21,11 +21,11 @@ void	set_starving_cron(t_philo *philo)
 
 void	communicate_action(t_philo *philo, t_philostate state)
 {
-	double elapsed;
+	double	elapsed;
 
 	do_mutex_action(&philo->table->mtx_print, LOCK);
 	elapsed = get_current_milis() - philo->table->timer;
-	printf("%ld - %d ", (long)elapsed, philo->id);
+	printf("%ld %d ", (long)elapsed, philo->id);
 	if (state == TOOK_FORK)
 		printf("has taken a fork\n");
 	if (state == EATING)
@@ -37,13 +37,11 @@ void	communicate_action(t_philo *philo, t_philostate state)
 	if (state == DIED)
 		printf("died\n");
 	do_mutex_action(&philo->table->mtx_print, UNLOCK);
-
 }
 
 int	assert_run(t_philo *philo)
 {
 	do_mutex_action(&philo->table->mtx_end_run, LOCK);
-	// printf("RUN IS: %d\n", philo->table->end_run);
 	if (philo->table->end_run == 1)
 	{
 		do_mutex_action(&philo->table->mtx_end_run, UNLOCK);
@@ -90,5 +88,4 @@ void	run_routine(t_table *tb)
 	pthread_join(judge, NULL);
 	while (++i < tb->philo_count)
 		pthread_join(tb->philo[i].thread, NULL);
-
 }

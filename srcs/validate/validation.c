@@ -37,7 +37,6 @@ int	validate_input(char **args, int c_args)
 		return (0);
 	while (i < c_args)
 	{
-
 		if (!ft_only_num(args[i]))
 			return (0);
 		if (ft_atol(args[i]) > 2147483647

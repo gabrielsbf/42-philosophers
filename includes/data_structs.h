@@ -44,9 +44,9 @@ typedef enum philo_state
 	SLEEP,
 	THINKING,
 	DIED,
-} t_philostate;
+}	t_philostate;
 
-typedef	struct s_fork
+typedef struct s_fork
 {
 	t_mutex	mtx_fork;
 	int		fork_id;
@@ -66,6 +66,7 @@ typedef struct s_philosophers
 	t_fork		*l_fork;
 	t_mutex		mtx_lunch_ct;
 	t_mutex		mtx_starve_time;
+	t_mutex		mtx_access_fork;
 	pthread_t	thread;
 
 }	t_philo;

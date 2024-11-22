@@ -18,7 +18,6 @@ int	is_thinking(t_philo *philo)
 		return (0);
 	communicate_action(philo, THINKING);
 	return (1);
-
 }
 
 int	is_sleeping(t_philo *philo)
@@ -28,7 +27,6 @@ int	is_sleeping(t_philo *philo)
 	communicate_action(philo, SLEEP);
 	make_elapse(philo->tt_sleep);
 	return (1);
-
 }
 
 static	void	return_fork(t_philo **philo)
@@ -46,9 +44,17 @@ static	int	get_side_fork(t_philo **philo, t_which_fork side)
 	t_fork	*fork_choosen;
 
 	if (side == LFORK)
+	{
+		do_mutex_action(&(*philo)->mtx_access_fork, LOCK);
 		fork_choosen = (*philo)->l_fork;
+		do_mutex_action(&(*philo)->mtx_access_fork, UNLOCK);
+	}
 	if (side == RFORK)
+	{
+		do_mutex_action(&(*philo)->mtx_access_fork, LOCK);
 		fork_choosen = (*philo)->r_fork;
+		do_mutex_action(&(*philo)->mtx_access_fork, UNLOCK);
+	}
 	do_mutex_action(&fork_choosen->mtx_fork, LOCK);
 	if (fork_choosen->in_use == 0)
 	{

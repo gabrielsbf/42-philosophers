@@ -12,7 +12,6 @@
 
 #include "philo.h"
 
-
 int	died_from_starve(t_philo *philo)
 {
 	do_mutex_action(&philo->mtx_starve_time, LOCK);
@@ -53,14 +52,11 @@ int	is_philo_full(t_philo *philo)
 int	all_lunched(t_philo *philo, int *lunch)
 {
 	if (is_philo_full(philo))
-		*lunch = *lunch + 1;
-	do_mutex_action(&philo->mtx_lunch_ct, LOCK);
+		(*lunch) = (*lunch) + 1;
 	if ((*lunch) == philo->table->philo_count)
 	{
-		do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 		return (1);
 	}
-	do_mutex_action(&philo->mtx_lunch_ct, UNLOCK);
 	return (0);
 }
 
@@ -80,7 +76,7 @@ void	*judge_routine(void *ptr)
 			if (end_table(&tb) == 1)
 			{
 				communicate_action(&tb->philo[i], DIED);
-				break;
+				break ;
 			}
 		}
 		i++;

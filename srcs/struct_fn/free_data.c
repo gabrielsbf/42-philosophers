@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "philo.h"
 
-static void remove_mtx(t_table **tb)
+static void	remove_mtx(t_table **tb)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	do_mutex_action(&(*tb)->mtx_end_run, DESTROY);
@@ -42,4 +41,3 @@ void	free_structs(t_table **tb)
 	free((*tb)->philo);
 	free(*tb);
 }
-

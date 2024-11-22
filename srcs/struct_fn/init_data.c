@@ -27,7 +27,7 @@ static void	set_forks(t_table *tb, t_fork **tb_fork)
 	}
 }
 
-static void call_philos(t_table *tb, t_philo **philo)
+static void	call_philos(t_table *tb, t_philo **philo)
 {
 	int	i;
 
@@ -46,12 +46,13 @@ static void call_philos(t_table *tb, t_philo **philo)
 		(*philo)[i].r_fork = &tb->fork[(i + 1) % tb->philo_count];
 		do_mutex_action(&((*philo)[i]).mtx_starve_time, INIT);
 		do_mutex_action(&((*philo)[i]).mtx_lunch_ct, INIT);
+		do_mutex_action(&((*philo)[i]).mtx_access_fork, INIT);
 		i++;
 	}
 }
+
 static t_table	*fill_table(t_table *tb, char **args, int c_args)
 {
-
 	tb->philo_count = ft_atol(args[1]);
 	tb->tt_die = ft_atol(args[2]);
 	tb->tt_eat = ft_atol(args[3]);
@@ -72,10 +73,9 @@ static t_table	*fill_table(t_table *tb, char **args, int c_args)
 
 t_table	*create_scenario(char **args, int c_args)
 {
-	t_table * tb;
+	t_table	*tb;
 
 	tb = malloc(sizeof(t_table));
 	tb = fill_table(tb, args, c_args);
 	return (tb);
 }
-

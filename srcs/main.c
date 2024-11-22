@@ -14,15 +14,14 @@
 
 void	start_process(char **args, int c_args)
 {
-	t_table *tb;
+	t_table	*tb;
 
 	tb = create_scenario(args, c_args);
-	print_tb(tb);
 	run_routine(tb);
 	free_structs(&tb);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (!validate_input(argv, argc))
 	{
